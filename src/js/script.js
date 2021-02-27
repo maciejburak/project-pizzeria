@@ -51,17 +51,150 @@
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
+  class Product {
+    constructor(id, data) {
+      const thisProduct = this;
+      thisProduct.id = id;
+      thisProduct.data = data;
+      thisProduct.renderInMenu();
+      thisProduct.getElements();
+      thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
+    }
+    renderInMenu() {
+      const thisProduct = this;
+      //console.log(thisProduct) //- pokazuje na obiekt
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      //console.log(generatedHTML);
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      //console.log(thisProduct.element);
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      menuContainer.appendChild(thisProduct.element);
+    }
+    getElements() {
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      //console.log(thisProduct.accordionTrigger);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      //console.log(thisProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      //console.log(thisProduct.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      //console.log(thisProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      //console.log(thisProduct.priceElem);
+    }
+    initAccordion() {
+      const thisProduct = this;
+      //console.log(thisProduct.element);
+      /* START: add event listener to clickable trigger on event click */
+      thisProduct.accordionTrigger.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+        /* find active product (product that has active class) */
+        const activeProduct = document.querySelector('.product.active');
+        //console.log(activeProduct);
+        //console.log(thisProduct);
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        if (activeProduct !== null && activeProduct != thisProduct.element) {
+
+          activeProduct.classList.remove('active');
+
+        }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+      });
+    }
+    initOrderForm() {
+      const thisProduct = this;
+      //console.log(thisProduct.initOrderForm);
+      thisProduct.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener('change', function () {
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+    processOrder() {
+      const thisProduct = this;
+      //console.log(thisProduct.processOrder);
+      const formData = utils.serializeFormToObject(thisProduct.form);//poodznaczne parametry w danym produkcie
+      //console.log('formData', formData);
+      // set price to default price
+      let price = thisProduct.data.price;//ceny produktow
+      //console.log(price);
+      // for every category (param)...
+      for (let paramId in thisProduct.data.params) {
+        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
+        //console.log(paramId)//nazwy danej kategorii we wszystkich produktach
+        const param = thisProduct.data.params[paramId];//wlasciwosci kazdej z kategorii
+        //console.log(formData[paramId])
+        // for every option in this category
+        for (let optionId in param.options) {
+          // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
+          const option = param.options[optionId];
+          //console.log(option)
+          console.log(optionId)
+          //console.log(optionId, option);
+          if (formData[paramId].includes(optionId)) {
+
+            if (!option.default) {
+              price = price + option.price;
+            }
+          } else {
+            if (option.default) {
+              price = price - option.price;
+            }
+          }
+        }
+        // update calculated price in the HTML
+        thisProduct.priceElem.innerHTML = price;
+      }
+    }
+  }
+
 
   const app = {
-    init: function(){
+    initMenu: function () {
+      //const testProduct = new Product();
+      //console.log('testProduct: ', testProduct);
       const thisApp = this;
+      //console.log(thisApp.data);
+      for (let productData in thisApp.data.products) {
+        //console.log(thisApp.data.products[productData]); ------ data
+        //console.log(productData) ----- id
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
+    initData: function () {
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+    init: function () {
+      const thisApp = this;/*
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
       console.log('classNames:', classNames);
       console.log('settings:', settings);
-      console.log('templates:', templates);
+      console.log('templates:', templates);*/
+      thisApp.initData();
+      thisApp.initMenu();
     },
+
   };
 
   app.init();
+
+
 }
