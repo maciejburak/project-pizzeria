@@ -40,13 +40,13 @@
     },
   };
 
-  const settings = {
+  /*const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
     }
-  };
+  };*/
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -74,7 +74,6 @@
     }
     getElements() {
       const thisProduct = this;
-
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       //console.log(thisProduct.accordionTrigger);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -85,25 +84,22 @@
       //console.log(thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       //console.log(thisProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      //console.log(thisProduct.imageWrapper);
     }
     initAccordion() {
       const thisProduct = this;
       //console.log(thisProduct.element);
-      /* START: add event listener to clickable trigger on event click */
       thisProduct.accordionTrigger.addEventListener('click', function (event) {
-        /* prevent default action for event */
         event.preventDefault();
-        /* find active product (product that has active class) */
         const activeProduct = document.querySelector('.product.active');
         //console.log(activeProduct);
         //console.log(thisProduct);
-        /* if there is active product and it's not thisProduct.element, remove class active from it */
         if (activeProduct !== null && activeProduct != thisProduct.element) {
 
           activeProduct.classList.remove('active');
 
         }
-        /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
@@ -131,26 +127,31 @@
       //console.log(thisProduct.processOrder);
       const formData = utils.serializeFormToObject(thisProduct.form);//poodznaczne parametry w danym produkcie
       //console.log('formData', formData);
-      // set price to default price
       let price = thisProduct.data.price;//ceny produktow
       //console.log(price);
-      // for every category (param)...
       for (let paramId in thisProduct.data.params) {
-        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         //console.log(paramId)//nazwy danej kategorii we wszystkich produktach
         const param = thisProduct.data.params[paramId];//wlasciwosci kazdej z kategorii
         //console.log(formData[paramId])
-        // for every option in this category
         for (let optionId in param.options) {
-          // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           //console.log(option)
-          console.log(optionId)
+          //console.log(optionId)
           //console.log(optionId, option);
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          //console.log(optionImage);
+          if (optionImage != null) {
+            optionImage.classList.remove('active');
+          }
           if (formData[paramId].includes(optionId)) {
-
             if (!option.default) {
               price = price + option.price;
+            }
+            if (optionImage != null) {
+              optionImage.classList.add('active');
+            }
+            else if (optionImage != null) {
+              optionImage.classList.add('active');
             }
           } else {
             if (option.default) {
@@ -158,7 +159,6 @@
             }
           }
         }
-        // update calculated price in the HTML
         thisProduct.priceElem.innerHTML = price;
       }
     }
