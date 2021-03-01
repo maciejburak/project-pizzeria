@@ -93,7 +93,7 @@
       thisProduct.accordionTrigger.addEventListener('click', function (event) {
         event.preventDefault();
         const activeProduct = document.querySelector('.product.active');
-        //console.log(activeProduct);
+        // console.log(activeProduct);
         //console.log(thisProduct);
         if (activeProduct !== null && activeProduct != thisProduct.element) {
 
@@ -170,7 +170,7 @@
       //const testProduct = new Product();
       //console.log('testProduct: ', testProduct);
       const thisApp = this;
-      //console.log(thisApp.data);
+      //console.log(thisApp);
       for (let productData in thisApp.data.products) {
         //console.log(thisApp.data.products[productData]); ------ data
         //console.log(productData) ----- id
