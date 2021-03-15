@@ -15,7 +15,7 @@ const app = {
     let pageMatchingHash = thisApp.pages[0].id;
     for (let page of thisApp.pages) {
       if (page.id == idFromHash) {
-        pageMatchingHash = page.id
+        pageMatchingHash = page.id;
         break;
       }
     }
@@ -30,7 +30,7 @@ const app = {
         const id = clickedElement.getAttribute('href').replace('#', '');
         thisApp.activatePage(id);
         window.location.hash = '#/' + id;
-      })
+      });
     }
   },
   activatePage: function (pageId) {
@@ -46,7 +46,6 @@ const app = {
     }
   },
   initBooking:function(){
-    const thisApp = this;
     const bookingElem = document.querySelector(select.containerOf.booking);
     new Booking (bookingElem);
 
