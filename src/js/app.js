@@ -11,7 +11,7 @@ const app = {
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     //console.log(thisApp.pages)
     const idFromHash = window.location.hash.replace('#/', '');
-    console.log(idFromHash);
+    //console.log(idFromHash);
     let pageMatchingHash = thisApp.pages[0].id;
     for (let page of thisApp.pages) {
       if (page.id == idFromHash) {
@@ -45,9 +45,9 @@ const app = {
       );
     }
   },
-  initBooking:function(){
+  initBooking: function () {
     const bookingElem = document.querySelector(select.containerOf.booking);
-    new Booking (bookingElem);
+    new Booking(bookingElem);
 
   },
   initMenu: function () {

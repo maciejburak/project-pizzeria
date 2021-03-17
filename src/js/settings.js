@@ -97,7 +97,7 @@ export const settings = {
   },
   amountWidget: {
     defaultValue: 1,
-    defaultMin: 0,
+    defaultMin: 1,
     defaultMax: 10,
   },
   datePicker: {
