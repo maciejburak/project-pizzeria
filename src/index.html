@@ -10,6 +10,7 @@
     rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="vendor/flickity.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -24,8 +25,9 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
-          <a href="#order">Order</a>
-          <a href="#booking">Booking</a>
+          <a href="#home" >Home</a>
+          <a href="#order" >Order</a>
+          <a href="#booking" >Booking</a>
         </div>
         <div id="cart" class="cart">
           <div class="cart__summary">
@@ -71,7 +73,106 @@
     <section id="booking">
       <div class="booking-wrapper container"></div>
     </section>
+    <section id="home">
+      <div class="home-wrapper container"></div>
+    </section>
   </div>
+
+  <script id="template-home-widget" type="text/x-handlebars-template">
+    <div class="home-widget">
+      <form class="directions">
+        <div class = "parts-section">
+          <div class="online-order">
+            <a href="#order" class="link1">ONLINE ORDER</a>
+          </div>
+          <div class="book-a-table">
+            <a href="#booking" class="link2">BOOK A TABLE</a>
+          </div>
+        </div>
+        <div class="informations">
+          <h2>OPENING HOURS</h2>
+          <h5>TUE - SAT, 12PM-12AM</h5>
+        </div>
+      </form>
+      <form>
+        <div class="carousel" data-flickity='{ "autoPlay": true, "lazyLoad": true}'>
+          <div class="carousel-cell">
+            <img class="carousel-cell-image" src="images/home/pizza-3.jpg" alt="">
+            <div class="carousel-cell-text">
+              <h3>AMAZING SERVICE!</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in erat at justo mattis aliquam quis
+                et leo. Cras at tortor sed augue facilisis scelerisque sed vitae sapien.</p>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <img class="carousel-cell-image" src="images/home/pizza-3.jpg" alt="">
+            <div class="carousel-cell-text">
+              <h3>AMAZING SERVICE!</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in erat at justo mattis aliquam quis
+                et leo. Cras at tortor sed augue facilisis scelerisque sed vitae sapien.</p>
+            </div>
+          </div>
+          <div class="carousel-cell">
+            <img class="carousel-cell-image" src="images/home/pizza-3.jpg" alt="">
+            <div class="carousel-cell-text">
+              <h3>AMAZING SERVICE!</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in erat at justo mattis aliquam quis
+                et leo. Cras at tortor sed augue facilisis scelerisque sed vitae sapien.</p>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+        <div class="gallery">
+          <div class="row">
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-4.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-5.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-6.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-7.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-8.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="photo-wrapper">
+            <img src="images/home/pizza-9.jpg" alt="">
+            <div class="icons">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>   
+  </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
@@ -85,10 +186,10 @@
           <div class="hour-picker range-slider">
               <div class="output"></div>
               <label class="booking-option-title">Pick a time</label>
-            <input type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <input type="range" id="chuj" name="hour" value="12" min="12" max="24" step="0.5" >
           </div>
         </div>
-        <div class="floor-plan">
+        <div class="floor-plan ">
           <div class="object entry">entry</div>
           <div class="object bar">bar</div>
           <div class="object table" data-table="1">table-1</div>
@@ -248,6 +349,7 @@
     </article> <!-- .product -->
   </script>
 
+  <script src="vendor/flickity.pkgd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>

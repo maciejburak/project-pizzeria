@@ -1,0 +1,173 @@
+.home-widget {
+  background-color: white;
+  padding-bottom: 5%;
+  margin-top: 6%;
+  border-radius: 5%;
+}
+
+
+form {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-family: $font-bold;
+}
+
+.parts-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.online-order {
+  background-image: url('/images/home/pizza-1.jpg');
+  background-position: center center;
+  background-size: cover;
+  width: 49%;
+  height: 150px;
+  color: honeydew;
+  display: flex;
+}
+
+.book-a-table {
+  background-image: url('/images/home/pizza-2.jpg');
+  background-position: center center;
+  background-size: cover;
+  width: 49%;
+  height: 150px;
+  display: flex;
+}
+
+.book-a-table a {
+  margin: auto;
+  transition: transform .5s;
+  will-change: transform;
+  text-decoration: none;
+  color: honeydew;
+}
+
+.online-order a {
+  margin: auto;
+  transition: transform .5s;
+  will-change: transform;
+  text-decoration: none;
+  color: honeydew;
+}
+
+.book-a-table:hover .link2 {
+  transform: translateY(-15px);
+}
+
+.online-order:hover .link1 {
+  transform: translateY(-15px);
+}
+
+.informations {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+  background-color: $color-main;
+  color: honeydew;
+}
+
+.informations h5 {
+  margin-top: 1%;
+}
+
+.informations h2 {
+  margin-bottom: 1%;
+}
+
+.carousel-cell {
+  display: flex;
+  flex-direction: row;
+  height: 250px;
+  align-items: center;
+}
+
+.carousel-cell-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+}
+
+.carousel-cell-text {
+  padding-left: 2%;
+  width: 335px;
+
+}
+
+.gallery {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1%;
+}
+
+.photo-wrapper {
+  width: 31.33333%;
+  height: 180px;
+  position: relative;
+  color: white;
+}
+
+.row::before,
+.row::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.fa-heart {
+  position: absolute;
+  top: 50%;
+  right: 33.3333%;
+  display: none;
+  opacity: 0;
+  color: red;
+  transition: all 1s;
+}
+
+.fa-share-alt {
+  position: absolute;
+  top: 50%;
+  left: 33.3333%;
+  display: none;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.photo-wrapper:hover .fas {
+  display: block;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.fa-heart:hover {
+  transform: scale(2.5);
+}
+
+.fa-share-alt:hover {
+  transform: scale(2.5);
+}
+
+.photo-wrapper:hover img {
+  filter: brightness(50%);
+}
