@@ -35,6 +35,7 @@ const app = {
     }
   },
   activatePage: function (pageId) {
+    
     const thisApp = this;
     for (let page of thisApp.pages) {
       page.classList.toggle(classNames.pages.active, page.id == pageId);
@@ -104,7 +105,6 @@ const app = {
     thisApp.initCart();
     thisApp.initBooking();
     thisApp.initHome();
-
   },
 
 };
