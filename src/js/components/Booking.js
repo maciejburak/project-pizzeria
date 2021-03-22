@@ -164,7 +164,7 @@ class Booking {
     thisBooking.pickDate = new DatePicker(thisBooking.dom.dataPicker);
     thisBooking.pickHour = new HourPicker(thisBooking.dom.hourPicker);
   }
-  initActions(){
+  initActions() {
     const thisBooking = this;
     thisBooking.dom.wrapper.addEventListener('change', function () {
       thisBooking.prepareReservation();
@@ -176,14 +176,14 @@ class Booking {
     thisBooking.dom.tableContainer.addEventListener('click', function () {
       thisBooking.prepareReservation();
     });
-    thisBooking.dom.button.addEventListener('click', function (){
-      if(document.querySelector('.date-picker input').value.length > 0){
+    thisBooking.dom.button.addEventListener('click', function () {
+      if (document.querySelector('.date-picker input').value.length > 0) {
         thisBooking.sendOrder();
-      }else{
+      } else {
         alert('Pizzeria is closed today');
       }
     });
-    
+
   }
   selectedTable() {
     const thisBooking = this;
@@ -213,11 +213,12 @@ class Booking {
         }
       });
     }
+    console.log(this);
   }
   prepareReservation() {
     const thisBooking = this;
     thisBooking.updateDOM();
-    
+
     thisBooking.payload = {
       date: thisBooking.date,
       hour: utils.numberToHour(thisBooking.hour),
@@ -237,7 +238,7 @@ class Booking {
     return thisBooking.payload;
 
   }
-  sendOrder(){
+  sendOrder() {
     const thisBooking = this;
     const url = settings.db.url + '/' + settings.db.booking;
     const options = {
@@ -249,7 +250,7 @@ class Booking {
     };
 
     fetch(url, options);
-  
+
   }
 }
 
