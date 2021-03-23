@@ -1,4 +1,4 @@
-// eslint-disable-line no-unused-vars
+
 
 class BaseWidget {
   constructor(wrapperElement, initialValue) {
