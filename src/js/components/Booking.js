@@ -10,8 +10,8 @@ class Booking {
     const thisBooking = this;
     thisBooking.randerAndGetElements(element);
     thisBooking.initWidgets();
-    thisBooking.getData();
     thisBooking.initActions();
+    thisBooking.getData();
     thisBooking.selectedTable();
   }
   randerAndGetElements(element) {
@@ -88,7 +88,6 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
-
     for (let item of bookings) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
@@ -144,7 +143,6 @@ class Booking {
       if (!isNaN(tableId)) {
         parsedTableId = parseInt(tableId);
       }
-
       if (
         !allAvailable
         &&
@@ -170,15 +168,16 @@ class Booking {
       thisBooking.prepareReservation();
     });
     thisBooking.dom.wrapper.addEventListener('updated', function () {
-      console.log(document.querySelector('.date-picker input').value);
       thisBooking.prepareReservation();
     });
     thisBooking.dom.tableContainer.addEventListener('click', function () {
       thisBooking.prepareReservation();
     });
-    thisBooking.dom.button.addEventListener('click', function () {
+    thisBooking.dom.button.addEventListener('click', function (event) {
       if (document.querySelector('.date-picker input').value.length > 0) {
+        thisBooking.updateDOM();
         thisBooking.sendOrder();
+        event.preventDefault();
       } else {
         alert('Pizzeria is closed today');
       }
@@ -209,11 +208,10 @@ class Booking {
           alert('Stolik niedostępny');
           document.querySelector('.floor-plan').dataset.value = 'null';
         } else {
-          document.querySelector('.floor-plan').dataset.value = thisBooking.checked[0];
+          document.querySelector('.floor-plan').dataset.value = parseInt(thisBooking.checked[0]);
         }
       });
     }
-    console.log(this);
   }
   prepareReservation() {
     const thisBooking = this;
@@ -222,7 +220,7 @@ class Booking {
     thisBooking.payload = {
       date: thisBooking.date,
       hour: utils.numberToHour(thisBooking.hour),
-      table: document.querySelector('.floor-plan').getAttribute('data-value'),
+      table: parseInt(document.querySelector('.floor-plan').getAttribute('data-value')),
       duration: parseInt(document.querySelector('.hours-amount input').value),
       ppl: parseInt(document.querySelector('.people-amount input').value),
       starters: [],
