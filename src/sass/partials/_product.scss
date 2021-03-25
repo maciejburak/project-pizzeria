@@ -80,7 +80,7 @@
       height: 220px;
     }
 
-    > img {
+    >img {
       @include center();
       height: auto;
       opacity: 0;
@@ -99,7 +99,8 @@
       @include accordion-open();
     }
 
-    .product__order, .product__images {
+    .product__order,
+    .product__images {
       opacity: 1;
     }
 
@@ -120,4 +121,16 @@
     padding: 0;
   }
 
+}
+
+.product__params {
+  width: 180%;
+}
+
+#order .widget-amount {
+  width: 150%;
+}
+
+#order .btn-primary {
+  width: 150%;
 }
